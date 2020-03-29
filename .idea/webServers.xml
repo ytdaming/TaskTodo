@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="80608d4e-fe67-463a-a72f-5bf8281fb6e3" name="Ubuntu" url="http://192.168.19.128">
+        <fileTransfer host="192.168.19.128" port="22" rootFolder="/home/hansming/TaskTodo" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
