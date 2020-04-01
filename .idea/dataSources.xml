@@ -15,7 +15,7 @@
         <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
-    <data-source source="LOCAL" name="Tasktodo" uuid="76f1077a-6cf9-4f2a-a262-2b0a782056c4">
+    <data-source source="LOCAL" name="TaskTodo" uuid="1db28508-7ac7-4f33-af95-da8ca19fd838">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.gjt.mm.mysql.Driver</jdbc-driver>
