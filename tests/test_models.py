@@ -1,14 +1,16 @@
-"""
-# 存储数据库相关的操作
-"""
-from myapp import db
-from werkzeug.security import  generate_password_hash, check_password_hash
-from datetime import  datetime
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+import pymysql
 
+pymysql.install_as_MySQLdb()
 
+app=Flask(__name__)
+app.debug=True
+app.config.from_pyfile('../config.py')
+# app.config
+db=SQLAlchemy(app)
 
-# 用户和任务的关系: 一对多， 用户是一， 任务是多，
-# 用户和分类的关系:
 class User(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     username = db.Column(db.String(20), unique=True)
@@ -24,15 +26,6 @@ class User(db.Model):
         """u.password"""
         raise  AttributeError("密码属性不可以读取")
 
-    @password.setter
-    def password(self, password):
-        """u.password = xxxxx """
-        self.password_hash = generate_password_hash(password)
-
-
-    def verify_password(self, password):
-        """验证密码是否正确"""
-        return  check_password_hash(self.password_hash, password)
 
     def __repr__(self):
         return  "<User %s>" %(self.username)
@@ -65,36 +58,12 @@ class Category(db.Model):
     def __repr__(self):
         return  "<Category %s>" %(self.name)
 
-# 初始化，用于测试数据库，实际代码不用写，因为把初始化数据库写在models.py文件中更为方便
-# def init():
-    # db.drop_all()
-    # db.create_all()
-    # u3 = User(username='user3',email='user3@qq.com')
-    # u3.password='user3'
-    # db.session.add(u3)
-    # u4 = User(username='user4', email='user4@qq.com')
-    # u4.password = 'user4'
-    #
-    # db.session.add(u4)
-    # db.session.commit()
-    # print('用户%s创建成功' %(u3.username))
-    # c = Category(name='娱乐',user_id=1)
-    # db.session.add(c)
-    # print('分类%s创建成功' %(c.name))
-    #
-    # t = Todo(content='游戏flask',category_id=1,user_id=1)
-    # db.session.add(t)
-    # print('任务%s添加成功' %(t.content))
-    #
-    # db.session.commit()
-    #
-    # user=User.query.first()
-    # print(user.username)
-    # passwd=user.password
 
+user=User.query.filter_by(username='admin').first()
+print(user.todos)
+
+todo=Todo.query.filter_by(id='1').first()
+print(todo.user)
 #
-#
-#
-#
-# if __name__ == '__main__':
-#     init()
+# if __name__ =='__main__':
+#     app.run()

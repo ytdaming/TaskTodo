@@ -4,9 +4,12 @@ from flask_script import Manager
 import pymysql
 from flask_bootstrap import Bootstrap
 
+pymysql.install_as_MySQLdb()
+
 app: Flask=Flask(__name__)
 app.debug=True
 app.config.from_pyfile('../config.py')
+
 from .admin import admin as admin_blueprint
 app.register_blueprint(admin_blueprint)
 
