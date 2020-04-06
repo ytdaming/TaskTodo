@@ -13,3 +13,14 @@ def user():
     users=User.query.all()
     print(users)
     return 'users'
+
+@app.route('/login',methods=['POST','GET'])
+def login():
+    return 'login'
+
+@app.route('/register',methods=['POST','GET'])
+def register():
+    return 'register'
+
+
+

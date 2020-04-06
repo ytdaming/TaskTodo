@@ -65,19 +65,19 @@ class Category(db.Model):
     def __repr__(self):
         return  "<Category %s>" %(self.name)
 
-# 初始化，用于测试数据库，实际代码不用写，因为把初始化数据库写在models.py文件中更为方便
+# # 初始化，用于测试数据库，实际代码不用写，因为把初始化数据库写在models.py文件中更为方便
 # def init():
     # db.drop_all()
     # db.create_all()
-    # u3 = User(username='user3',email='user3@qq.com')
-    # u3.password='user3'
-    # db.session.add(u3)
-    # u4 = User(username='user4', email='user4@qq.com')
-    # u4.password = 'user4'
+    # u1 = User(username='user1',email='user1@qq.com')
+    # u1.password='user1'
     #
-    # db.session.add(u4)
+    # u2 = User(username='user2', email='user2@qq.com')
+    # u2.password = 'user2'
+    # db.session.add(u1)
+    # db.session.add(u2)
     # db.session.commit()
-    # print('用户%s创建成功' %(u3.username))
+    # print('用户%s创建成功' %(u1.username))
     # c = Category(name='娱乐',user_id=1)
     # db.session.add(c)
     # print('分类%s创建成功' %(c.name))
@@ -92,9 +92,9 @@ class Category(db.Model):
     # print(user.username)
     # passwd=user.password
 
-#
-#
-#
+
+
+
 #
 # if __name__ == '__main__':
 #     init()
