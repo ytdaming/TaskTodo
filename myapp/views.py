@@ -1,7 +1,24 @@
 from myapp import app,db
 from flask import render_template, flash, redirect, url_for, session,request
 from myapp.models import User,Todo,Category
+from myapp.forms import RegisterForm
 
+@app.route('/baselogin')
+def baselogin():
+    form = RegisterForm()
+    # 判断是否是验证提交
+    if form.validate_on_submit():
+        # 跳转
+        flash(form.name.data + '|' + form.password.data)
+        return redirect(url_for('success'))
+    else:
+        # 渲染
+        return render_template('baselogin.html', form=form)
+
+
+@app.route('/success')
+def success():
+    return '<h1>Success</h1>'
 
 @app.route('/')
 def index():
@@ -21,6 +38,9 @@ def login():
 @app.route('/register',methods=['POST','GET'])
 def register():
     return 'register'
+
+
+
 
 
 
