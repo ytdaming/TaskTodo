@@ -7,5 +7,6 @@ SQLALCHEMY_TRACK_MODIFICATIONS = True
 # 需要额外的内存， 如果不必要的可以禁用它。""""
 
 #flask-form组件功能设置，入境问俗csrf加密功能
+
 CSRF_ENABLED = True
 SECRET_KEY = '123456'

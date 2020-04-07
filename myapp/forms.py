@@ -19,8 +19,8 @@ class RegisterForm(FlaskForm):
     username = StringField(
         label="用户名",
         validators=[
-            DataRequired(message=u"用户名不能为空"),
-            Length(10,20,message=u'用户名应为10~20位之间')
+            DataRequired(message=u'用户名不能为空'),
+            Length(10,20,message=u'用户名应为10~20位之间'),
         ],
     )
     password = PasswordField(
@@ -62,6 +62,7 @@ class LoginForm(FlaskForm):
         label="用户名",
         validators=[
             DataRequired(),
+            Length(3, 12, "用户名必须是3-12位")
 
         ],
     )
@@ -69,7 +70,7 @@ class LoginForm(FlaskForm):
         label='密码',
         validators=[
             DataRequired(),
-            # Length(6, 12, "密码必须是6-12位")
+            Length(6, 12, "密码必须是6-12位")
         ]
     )
     submit = SubmitField(
