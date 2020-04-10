@@ -16,11 +16,24 @@
             <tr>
                 <td>用户姓名</td>
                 <td>电子邮件</td>
+                <td>用户密码</td>
             </tr>
             {%for user in users%}
             <tr>
                 <td>{{user.username}}</td>
                 <td>{{user.email}}</td>
+
+                {#
+                 修改默认密码
+                　先将默认密码与密码进行对比，一致为对号，不一致为叉号
+                　无论是对号还是叉号，点击修改为默认密码，显示为对号
+                #}
+
+
+                <td><a href="{{url_for('resetpasswd',id=user.id)}}"><span class="glyphicon glyphicon-ok"
+                                                                                      aria-hidden="true"></span></a>
+
+                </td>
             </tr>
             {%endfor%}
         </table>

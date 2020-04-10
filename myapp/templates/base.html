@@ -1,45 +1,76 @@
-
 {% extends 'bootstrap/base.html' %}
 
 {% block styles %}
-    {#  先继承父类的css样式导入   #}
-    {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{#  先继承父类的css样式导入   #}
+{{ super() }}
+<!-- Bootstrap -->
+<link href="{{bootstrap_find_resource('css/bootstrap.css', cdn='bootstrap')}}" rel="stylesheet">
+<!-- Bootstrap core CSS -->
+{#
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">#}
+<!-- bb——这里是通过下载网页上的css文件，保存在static目录下即可-->
+<link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 {% endblock %}
 
 
 {% block scripts %}
 {{ super() }}
-<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="{{bootstrap_find_resource('jquery.js', cdn='jquery')}}"></script>
+<script src="{{bootstrap_find_resource('js/bootstrap.js', cdn='bootstrap')}}"></script>
+
+<script src="/static/js/jquery.min.js"></script>
+
+<script src="/static/js/bootstrap.min.js"></script>
+
+
 {% endblock %}
 
 
 {% block navbar %}
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Todo</a>
-            </div>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Todo</a>
+        </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">主页 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">用户信息</a></li>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{{url_for('index')}}">主页 <span class="sr-only">(current)</span></a></li>
+                <!--                    url_for和blueprint:url_for('视图函数')，在蓝图时，url_for('蓝图名.视图函数')-->
+<!--                <li><a href="{{url_for('category_add')}}">后台管理</a></li>-->
 
 
-                </ul>
+                 <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">后台管理 <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{url_for('admin.userlist')}}">用户列表</a></li>
+                                <li><a href="{{ url_for('category_add') }}">增加任务种类</a></li>
+                            </ul>
+                 </li>
 
-                <ul class="nav navbar-nav navbar-right">
+
+
+                <li class="dropdown">
+                    <a href="{{url_for('task_list')}}">任务信息</a>
+                </li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
                     {#       分类讨论:
                             1. 如果没有登录， 显示登录和注册按钮；
                             2. 如果登录成功， 显示用户名称和注销按钮
@@ -54,10 +85,12 @@
                                aria-haspopup="true"
                                aria-expanded="false">当前用户：{{ session.user }} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li role="separator" class="divider"></li>
+<!--                                <li role="separator" class="divider"></li>-->
                                 <li><a href="{{ url_for('logout') }}">注销</a></li>
                             </ul>
                         </li>
+<!--                        <li><a href="#">当前用户：{{ session.user }} </a></li>-->
+<!--                        <li><a href="{{ url_for('logout') }}">注销</a></li>-->
 
                     {% endif %}
                 </ul>

@@ -20,7 +20,7 @@ class RegisterForm(FlaskForm):
         label="用户名",
         validators=[
             DataRequired(message=u'用户名不能为空'),
-            Length(10,20,message=u'用户名应为10~20位之间'),
+            Length(3,10,message=u'用户名应为3~20位之间'),
         ],
     )
     password = PasswordField(
@@ -118,3 +118,21 @@ class EditTodoForm(TodoForm):
     submit = SubmitField(
         label="编辑任务",
     )
+
+
+class AddCategoryForm(FlaskForm):
+    name=StringField(
+        label="类型名",
+        validators=[
+            DataRequired(),
+            Length(3, 12, "任务类型名必须是3-12位")
+        ]
+    )
+    submit=SubmitField(
+            label="编辑任务",
+    )
+    def validate_categoryname(self, field):
+        # filed.data ==== username表单提交的内容
+        category_name = Category.query.filter_by(name=field.data).first()
+        if category_name:
+            raise ValidationError("用户名%s已经注册" % (category_name.name))
